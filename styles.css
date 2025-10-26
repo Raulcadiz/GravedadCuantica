@@ -44,7 +44,7 @@ h1 {
     flex-wrap: wrap;
 }
 
-.btn {
+.btn, .btn-mode {
     background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%);
     color: white;
     border: none;
@@ -57,12 +57,12 @@ h1 {
     box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
 }
 
-.btn:hover {
+.btn:hover, .btn-mode:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
 }
 
-.btn:active {
+.btn:active, .btn-mode:active {
     transform: translateY(0);
 }
 
@@ -80,14 +80,20 @@ input[type="range"] {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
     padding: 2rem;
     max-width: 1800px;
     margin: 0 auto;
 }
 
-.visualization {
+.visualization-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.canvas-container {
     position: relative;
     background: rgba(10, 10, 30, 0.5);
     border-radius: 10px;
@@ -96,9 +102,9 @@ main {
     border: 1px solid rgba(0, 212, 255, 0.2);
 }
 
-#spinNetwork {
+canvas {
     width: 100%;
-    height: 600px;
+    height: 400px;
     border-radius: 8px;
     background: radial-gradient(circle at center, #0a0a1a 0%, #000000 100%);
 }
@@ -133,7 +139,7 @@ main {
     font-size: 1.1rem;
 }
 
-.theory-panel {
+.analysis-panel, .theory-panel {
     background: rgba(20, 20, 50, 0.7);
     border-radius: 10px;
     padding: 1.5rem;
@@ -223,7 +229,7 @@ main {
     color: #00ff88;
 }
 
-.formula {
+.formula, .problem-box, .warning-box, .equations-box, .open-problem {
     background: rgba(0, 50, 100, 0.3);
     border-left: 4px solid #00d4ff;
     padding: 1rem;
@@ -232,10 +238,60 @@ main {
     font-family: 'Courier New', monospace;
 }
 
-.formula p {
+.formula p, .equation {
     color: #00ff88;
     font-size: 1.1rem;
     margin: 0.5rem 0;
+}
+
+.problem-text, .critical {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.regime-indicator {
+    margin: 1.5rem 0;
+}
+
+.regime-bar {
+    height: 10px;
+    background: linear-gradient(to right, #ff4444, #ffff00, #00ff00);
+    position: relative;
+    border-radius: 5px;
+}
+
+.regime-marker {
+    position: absolute;
+    top: -5px;
+    width: 4px;
+    height: 20px;
+    background: white;
+    box-shadow: 0 0 5px white;
+    transition: left 0.3s ease;
+}
+
+.regime-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #a0a0ff;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.comparison-table th, .comparison-table td {
+    border: 1px solid #00d4ff;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.comparison-table th {
+    background: rgba(0, 100, 150, 0.5);
 }
 
 footer {
@@ -258,16 +314,12 @@ footer p {
 }
 
 @media (max-width: 1200px) {
-    main {
+    .visualization-dual {
         grid-template-columns: 1fr;
     }
     
-    h1 {
-        font-size: 2rem;
-    }
-    
-    #spinNetwork {
-        height: 500px;
+    canvas {
+        height: 300px;
     }
 }
 
@@ -295,7 +347,6 @@ footer p {
     }
 }
 
-/* Animaciones adicionales */
 @keyframes pulse {
     0%, 100% {
         opacity: 1;
